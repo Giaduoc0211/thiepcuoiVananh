@@ -1067,59 +1067,6 @@
   renderWishes(wishesCache);
 
   /* ----------------------------------------------------------------------
-     Lazy Google Maps
-     ---------------------------------------------------------------------- */
-
-  var map = document.getElementById("map");
-  var mapLoaded = false;
-
-  function loadMap() {
-    if (!map || mapLoaded) {
-      return;
-    }
-    mapLoaded = true;
-
-    var address = map.getAttribute("data-map-address") || "";
-    var iframe = document.createElement("iframe");
-
-    iframe.src =
-      "https://maps.google.com/maps?q=" + encodeURIComponent(address) + "&output=embed&z=14";
-    iframe.title = "Bản đồ chỉ đường đến tư gia nhà gái";
-    iframe.loading = "lazy";
-    iframe.setAttribute("referrerpolicy", "no-referrer-when-downgrade");
-    iframe.setAttribute("allowfullscreen", "");
-
-    iframe.addEventListener("load", function () {
-      var loading = document.getElementById("mapLoading");
-      if (loading) {
-        loading.classList.add("is-hidden");
-      }
-      map.setAttribute("aria-busy", "false");
-    });
-
-    map.appendChild(iframe);
-  }
-
-  if (map) {
-    if ("IntersectionObserver" in window) {
-      var mapObserver = new IntersectionObserver(
-        function (entries, observer) {
-          entries.forEach(function (entry) {
-            if (entry.isIntersecting) {
-              loadMap();
-              observer.disconnect();
-            }
-          });
-        },
-        { rootMargin: "300px 0px" }
-      );
-      mapObserver.observe(map);
-    } else {
-      loadMap();
-    }
-  }
-
-  /* ----------------------------------------------------------------------
      Keyboard shortcuts for the carousel dots
      ---------------------------------------------------------------------- */
 
