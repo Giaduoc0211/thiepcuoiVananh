@@ -518,6 +518,10 @@ svg {
   transform-origin: 50% 100%;
 }
 
+.polaroid--bride img {
+  object-position: 50% 0%;
+}
+
 .polaroid--groom {
   right: 2px;
   z-index: 2;
