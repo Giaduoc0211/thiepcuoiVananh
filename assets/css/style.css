@@ -649,13 +649,6 @@ svg {
   line-height: 1.55;
 }
 
-.arch__address {
-  margin-top: 4px;
-  font-size: 9px;
-  line-height: 1.65;
-  opacity: 0.92;
-}
-
 .arch__announce {
   margin: 30px auto 0;
   max-width: 270px;
