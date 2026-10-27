@@ -35,6 +35,6 @@ assets/
 ## Ghi chú
 
 - Ảnh cưới đã được tối ưu WebP; toàn bộ ảnh nằm trong `assets/img/`.
-- Album có 8 ảnh ở carousel (4 ảnh nổi bật xếp trước) và đủ 53 ảnh ở mục "Xem tất cả ảnh".
+- Album carousel 8 ảnh cưới đầu tiên; ảnh vest/váy cưới xếp trước, ảnh quần áo thường xếp sau. Chạm vào ảnh ở giữa để xem lớn.
 - Sổ lưu bút và xác nhận tham dự đang lưu trên thiết bị của khách (localStorage).
 - Hộp quà mừng sẽ hiển thị khi điền thông tin ngân hàng trong `assets/js/main.js`.
