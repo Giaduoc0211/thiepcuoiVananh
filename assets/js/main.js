@@ -110,16 +110,32 @@
      ---------------------------------------------------------------------- */
 
   var cover = document.getElementById("cover");
+  var coverGuest = document.getElementById("coverGuest");
   var openBtn = document.getElementById("openInvitation");
   var page = document.getElementById("page");
   var main = document.getElementById("main");
   var coverOpened = false;
 
-  var skipCover = false;
+  var searchParams = null;
   try {
-    skipCover = new URLSearchParams(window.location.search).get("open") === "1";
+    searchParams = new URLSearchParams(window.location.search);
   } catch (err) {
-    skipCover = false;
+    searchParams = null;
+  }
+
+  var skipCover = searchParams ? searchParams.get("open") === "1" : false;
+  var guestName = "";
+  if (searchParams) {
+    guestName = (searchParams.get("guest") || searchParams.get("ten") || "")
+      .replace(/\s+/g, " ")
+      .trim()
+      .slice(0, 80);
+  }
+
+  if (guestName && coverGuest) {
+    coverGuest.textContent = guestName;
+    coverGuest.hidden = false;
+    document.title = "Thân mời " + guestName + " · Vân Anh & Trung Kiên";
   }
 
   function finishOpen() {
@@ -303,6 +319,7 @@
   var CAROUSEL_INDICES = PHOTOS.map(function (_, index) {
     return index;
   });
+  var CAROUSEL_PAGE_SIZE = 8;
   var carousel = document.getElementById("carousel");
   var stage = document.getElementById("carouselStage");
   var dotsWrap = document.getElementById("carouselDots");
@@ -313,21 +330,40 @@
   var carouselNext = null;
 
   function carouselOffsets(index) {
-    var total = carouselItems.length;
-    var off = index - carouselIndex;
-    if (off > total / 2) {
-      off -= total;
+    return index - carouselIndex;
+  }
+
+  function updateCarouselImages() {
+    if (!carouselItems.length) {
+      return;
     }
-    if (off < -total / 2) {
-      off += total;
-    }
-    return off;
+
+    carouselItems.forEach(function (item, index) {
+      var img = item.querySelector("img");
+      if (!img) {
+        return;
+      }
+
+      var off = carouselOffsets(index);
+      var src = img.getAttribute("data-src") || "";
+
+      if (Math.abs(off) <= 4) {
+        if (!img.getAttribute("src") && src) {
+          img.src = src;
+          img.loading = "eager";
+        }
+      } else if (img.getAttribute("src")) {
+        img.removeAttribute("src");
+      }
+    });
   }
 
   function layoutCarousel() {
     if (!carousel || !carouselItems.length) {
       return;
     }
+
+    updateCarouselImages();
 
     var width = carousel.clientWidth;
     var wide = width >= 700;
@@ -360,19 +396,27 @@
       item.tabIndex = off === 0 ? 0 : -1;
     });
 
+    var activePage = Math.floor(carouselIndex / CAROUSEL_PAGE_SIZE);
     carouselDots.forEach(function (dot, index) {
-      var active = index === carouselIndex;
+      var active = index === activePage;
       dot.classList.toggle("is-active", active);
       dot.setAttribute("aria-selected", active ? "true" : "false");
       dot.tabIndex = active ? 0 : -1;
     });
+
+    if (carouselPrev) {
+      carouselPrev.disabled = carouselIndex === 0;
+    }
+    if (carouselNext) {
+      carouselNext.disabled = carouselIndex === carouselItems.length - 1;
+    }
   }
 
   function goToSlide(index) {
     if (!carouselItems.length) {
       return;
     }
-    carouselIndex = (index + carouselItems.length) % carouselItems.length;
+    carouselIndex = Math.max(0, Math.min(carouselItems.length - 1, index));
     layoutCarousel();
   }
 
@@ -395,12 +439,12 @@
       item.dataset.photoIndex = String(photoIndex);
 
       var img = document.createElement("img");
-      img.src = photo.src;
+      img.dataset.src = photo.src;
       img.alt = "Ảnh cưới " + (photoIndex + 1);
       img.width = photo.w;
       img.height = photo.h;
       img.decoding = "async";
-      img.loading = position < 8 ? "eager" : "lazy";
+      img.loading = "eager";
       item.appendChild(img);
 
       item.addEventListener("click", function () {
@@ -413,18 +457,23 @@
 
       stage.appendChild(item);
       carouselItems.push(item);
-
-      var dot = document.createElement("button");
-      dot.type = "button";
-      dot.className = "carousel__dot";
-      dot.setAttribute("role", "tab");
-      dot.setAttribute("aria-label", "Ảnh " + (position + 1));
-      dot.addEventListener("click", function () {
-        goToSlide(position);
-      });
-      dotsWrap.appendChild(dot);
-      carouselDots.push(dot);
     });
+
+    var pageCount = Math.ceil(PHOTOS.length / CAROUSEL_PAGE_SIZE);
+    for (var page = 0; page < pageCount; page += 1) {
+      (function (pageIndex) {
+        var dot = document.createElement("button");
+        dot.type = "button";
+        dot.className = "carousel__dot";
+        dot.setAttribute("role", "tab");
+        dot.setAttribute("aria-label", "Nhóm ảnh " + (pageIndex + 1));
+        dot.addEventListener("click", function () {
+          goToSlide(pageIndex * CAROUSEL_PAGE_SIZE);
+        });
+        dotsWrap.appendChild(dot);
+        carouselDots.push(dot);
+      })(page);
+    }
 
     if (carousel) {
       carouselPrev = document.createElement("button");

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="theme-color" content="#6b7b4f">
+  <title>Tạo link mời · Vân Anh &amp; Trung Kiên</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='16' fill='%236b7b4f'/%3E%3Ctext x='16' y='21' font-family='Georgia,serif' font-size='12' letter-spacing='.5' fill='%23fbfaf6' text-anchor='middle'%3EVA%3C/text%3E%3C/svg%3E">
+  <link rel="preload" href="assets/fonts/lora-400-normal-viet.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/ebgaramond-500-normal-viet.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="assets/fonts/fonts.css">
+  <link rel="stylesheet" href="assets/css/admin.css">
+</head>
+<body>
+  <main class="admin">
+    <header class="admin__head">
+      <p class="admin__eyebrow">Thiệp cưới · 05.12.2026</p>
+      <h1>Tạo link mời riêng</h1>
+      <p class="admin__intro">Nhập tên khách hoặc cặp đôi, tạo link rồi gửi riêng cho từng người. Mỗi link sẽ hiện đúng tên người nhận trên bìa thiệp.</p>
+    </header>
+
+    <section class="admin__card" aria-labelledby="formTitle">
+      <h2 class="admin__sr-only" id="formTitle">Thông tin khách mời</h2>
+      <form id="guestForm" novalidate>
+        <label class="admin__label" for="guestName">Tên khách / cặp đôi</label>
+        <input class="admin__input" id="guestName" name="guestName" type="text" maxlength="80" placeholder="Ví dụ: Vợ chồng anh Minh &amp; chị Lan" autocomplete="off" spellcheck="false" required>
+        <p class="admin__hint">Tên sẽ hiện ở dòng “Thân mời” trên bìa thiệp.</p>
+        <p class="admin__error" id="formError" role="alert" hidden></p>
+        <button class="admin__btn" type="submit">Tạo link mời</button>
+      </form>
+
+      <div class="admin__result" id="result" hidden>
+        <p class="admin__result-label">Link gửi khách</p>
+        <div class="admin__link-row">
+          <input class="admin__input admin__input--link" id="guestLink" type="text" readonly aria-label="Link mời của khách">
+          <button class="admin__btn admin__btn--small" id="copyBtn" type="button">Sao chép</button>
+        </div>
+        <div class="admin__result-actions">
+          <a class="admin__text-link" id="openBtn" href="#" target="_blank" rel="noopener">Mở thử</a>
+          <button class="admin__text-btn" id="newBtn" type="button">Tạo link khác</button>
+        </div>
+        <p class="admin__status" id="copyStatus" role="status"></p>
+      </div>
+    </section>
+
+    <section class="admin__card admin__card--recent" aria-labelledby="recentTitle">
+      <div class="admin__recent-head">
+        <h2 id="recentTitle">Đã tạo gần đây</h2>
+        <button class="admin__text-btn" id="clearBtn" type="button" hidden>Xóa hết</button>
+      </div>
+      <p class="admin__empty" id="recentEmpty">Chưa có link nào.</p>
+      <ul class="admin__list" id="recentList"></ul>
+    </section>
+
+    <p class="admin__note">Trang này không hiện trong thiệp. Link có dạng <code>?guest=...</code> và có thể gửi qua Zalo, Messenger, SMS…</p>
+  </main>
+
+  <script src="assets/js/admin.js" defer></script>
+</body>
+</html>

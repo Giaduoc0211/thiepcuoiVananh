@@ -15,6 +15,13 @@ Mở `http://localhost:4173`.
 
 - Mở thẳng vào thiệp (bỏ qua bìa): `index.html?open=1`
 
+## Tạo link mời riêng
+
+Mở `tao-thiep.html` để nhập tên khách/cặp đôi và tạo link gửi riêng. Link có dạng `index.html?guest=...`; tên sẽ hiện ở dòng “Thân mời” trên bìa thiệp.
+
+- Local: `http://localhost:4173/tao-thiep.html`
+- Online: `https://giaduoc0211.github.io/thiepcuoiVananh/tao-thiep.html`
+
 ## Nội dung
 
 - **Lễ vu quy:** 07:00, Chủ Nhật ngày 06/12/2026 (tức 28/10 năm Bính Ngọ), tại tư gia nhà gái — Xóm 2, thôn Thượng, xã Phật Tích, tỉnh Bắc Ninh.
@@ -35,6 +42,6 @@ assets/
 ## Ghi chú
 
 - Ảnh cưới đã được tối ưu WebP; toàn bộ ảnh nằm trong `assets/img/`.
-- Album carousel hiển thị toàn bộ ảnh trong `assets/img` (đã bỏ các ảnh ghép), sắp xếp ảnh vest/váy cưới trước, ảnh quần áo thường sau. Chạm vào ảnh ở giữa để xem lớn.
+- Album carousel hiển thị đủ 36 ảnh trong `assets/img` (đã bỏ các ảnh ghép), sắp xếp ảnh vest/váy cưới trước, ảnh quần áo thường sau. Chạm vào ảnh ở giữa để xem lớn.
 - Sổ lưu bút và xác nhận tham dự đang lưu trên thiết bị của khách (localStorage).
 - Hộp quà mừng sẽ hiển thị khi điền thông tin ngân hàng trong `assets/js/main.js`.

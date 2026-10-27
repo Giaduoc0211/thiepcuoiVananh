@@ -352,6 +352,19 @@ svg {
   color: rgba(107, 123, 79, 0.78);
 }
 
+.cover__guest {
+  max-width: 232px;
+  margin: 3px auto 0;
+  font-family: var(--font-serif);
+  font-size: 20px;
+  font-style: italic;
+  font-weight: 500;
+  line-height: 1.35;
+  color: var(--green-dark);
+  overflow-wrap: anywhere;
+  text-wrap: balance;
+}
+
 .cover__btn {
   position: relative;
   display: inline-flex;
@@ -849,6 +862,12 @@ svg {
 
 .carousel__nav:hover {
   background: rgba(60, 73, 45, 0.82);
+}
+
+.carousel__nav:disabled {
+  opacity: 0.3;
+  cursor: default;
+  pointer-events: none;
 }
 
 .carousel__nav--prev {
