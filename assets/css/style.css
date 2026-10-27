@@ -866,10 +866,13 @@ svg {
 
 .carousel__dots {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
   gap: 7px;
-  margin-top: 10px;
+  max-width: 100%;
+  margin: 10px auto 0;
+  padding-inline: 8px;
 }
 
 .carousel__dot {
@@ -984,7 +987,7 @@ svg {
 
 .party__place {
   margin-top: 12px;
-  font-size: 14px;
+  font-size: 15.5px;
   font-weight: 500;
   color: var(--green-dark);
 }

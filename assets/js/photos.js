@@ -1,4 +1,4 @@
-/* Auto-generated photo manifest: 53 photos, wedding attire first, then casual. */
+/* Auto-generated photo manifest: 46 photos, wedding attire first, then casual. Collages removed. */
 window.WEDDING_PHOTOS = [
   { src: "assets/img/p34.webp", w: 1200, h: 1800 },
   { src: "assets/img/p25.webp", w: 1200, h: 1800 },
@@ -22,13 +22,9 @@ window.WEDDING_PHOTOS = [
   { src: "assets/img/p01.webp", w: 1200, h: 1800 },
   { src: "assets/img/p05.webp", w: 1200, h: 900 },
   { src: "assets/img/p06.webp", w: 1200, h: 900 },
-  { src: "assets/img/p07.webp", w: 1200, h: 900 },
   { src: "assets/img/p08.webp", w: 1200, h: 900 },
   { src: "assets/img/p09.webp", w: 1200, h: 900 },
-  { src: "assets/img/p10.webp", w: 1200, h: 900 },
-  { src: "assets/img/p11.webp", w: 1200, h: 900 },
   { src: "assets/img/p12.webp", w: 1200, h: 900 },
-  { src: "assets/img/p13.webp", w: 1200, h: 900 },
   { src: "assets/img/p42.webp", w: 1200, h: 1800 },
   { src: "assets/img/p43.webp", w: 1200, h: 1800 },
   { src: "assets/img/p44.webp", w: 1200, h: 1800 },
@@ -47,10 +43,7 @@ window.WEDDING_PHOTOS = [
   { src: "assets/img/p04.webp", w: 1200, h: 1800 },
   { src: "assets/img/p14.webp", w: 1200, h: 900 },
   { src: "assets/img/p15.webp", w: 1200, h: 900 },
-  { src: "assets/img/p16.webp", w: 1200, h: 900 },
   { src: "assets/img/p17.webp", w: 1200, h: 900 },
-  { src: "assets/img/p18.webp", w: 1200, h: 900 },
   { src: "assets/img/p19.webp", w: 1200, h: 900 },
-  { src: "assets/img/p20.webp", w: 1200, h: 900 },
-  { src: "assets/img/p21.webp", w: 1200, h: 900 }
+  { src: "assets/img/p20.webp", w: 1200, h: 900 }
 ];

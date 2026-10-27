@@ -300,7 +300,9 @@
      Carousel
      ---------------------------------------------------------------------- */
 
-  var CAROUSEL_INDICES = [0, 1, 2, 3, 4, 5, 6, 7];
+  var CAROUSEL_INDICES = PHOTOS.map(function (_, index) {
+    return index;
+  });
   var carousel = document.getElementById("carousel");
   var stage = document.getElementById("carouselStage");
   var dotsWrap = document.getElementById("carouselDots");
@@ -398,7 +400,7 @@
       img.width = photo.w;
       img.height = photo.h;
       img.decoding = "async";
-      img.loading = "eager";
+      img.loading = position < 8 ? "eager" : "lazy";
       item.appendChild(img);
 
       item.addEventListener("click", function () {
