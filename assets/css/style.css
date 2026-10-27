@@ -268,12 +268,22 @@ svg {
 
 .cover__floral {
   position: absolute;
+  z-index: 0;
   width: 172px;
   height: 172px;
   color: var(--green-dark);
   opacity: 0.95;
   filter: drop-shadow(0 2px 6px rgba(107, 123, 79, 0.14));
   pointer-events: none;
+}
+
+.cover__names,
+.cover__date,
+.cover__invite,
+.cover__guest,
+.cover__btn {
+  position: relative;
+  z-index: 1;
 }
 
 .cover__floral--tl {

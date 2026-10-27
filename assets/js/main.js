@@ -330,7 +330,15 @@
   var carouselNext = null;
 
   function carouselOffsets(index) {
-    return index - carouselIndex;
+    var total = carouselItems.length;
+    var off = index - carouselIndex;
+    if (off > total / 2) {
+      off -= total;
+    }
+    if (off < -total / 2) {
+      off += total;
+    }
+    return off;
   }
 
   function updateCarouselImages() {
@@ -404,19 +412,13 @@
       dot.tabIndex = active ? 0 : -1;
     });
 
-    if (carouselPrev) {
-      carouselPrev.disabled = carouselIndex === 0;
-    }
-    if (carouselNext) {
-      carouselNext.disabled = carouselIndex === carouselItems.length - 1;
-    }
   }
 
   function goToSlide(index) {
     if (!carouselItems.length) {
       return;
     }
-    carouselIndex = Math.max(0, Math.min(carouselItems.length - 1, index));
+    carouselIndex = (index + carouselItems.length) % carouselItems.length;
     layoutCarousel();
   }
 
