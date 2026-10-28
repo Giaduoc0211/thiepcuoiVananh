@@ -22,6 +22,28 @@ Mở `tao-thiep.html` để nhập tên khách/cặp đôi và tạo link gửi 
 - Local: `http://localhost:4173/tao-thiep.html`
 - Online: `https://giaduoc0211.github.io/thiepcuoiVananh/tao-thiep.html`
 
+## Nhận xác nhận tham dự bằng Google Sheet
+
+GitHub Pages chỉ host file tĩnh, nên phần nhận RSVP dùng Google Apps Script làm backend miễn phí.
+
+1. Tạo một Google Sheet mới.
+2. Vào **Extensions → Apps Script**, dán nội dung `google-apps-script/Code.gs` vào `Code.gs`, bấm **Save**.
+3. Chạy hàm `setup()` một lần và cấp quyền cho Google.
+4. **Deploy → New deployment → Web app**:
+   - Execute as: **Me**
+   - Who has access: **Anyone**
+   - Copy **Web app URL**.
+5. Dán URL vào `assets/js/config.js`:
+
+```js
+window.WEDDING_ENDPOINTS = {
+  rsvp: "https://script.google.com/macros/s/.../exec",
+  guestbook: "https://script.google.com/macros/s/.../exec"
+};
+```
+
+Sau khi gửi thử, Google Sheet sẽ có các tab `RSVP`, `Wishes` và `Tổng hợp`. Tab `Tổng hợp` hiển thị tổng phản hồi, tổng số người tham dự và số lời chúc.
+
 ## Nội dung
 
 - **Lễ vu quy:** 07:00, Chủ Nhật ngày 06/12/2026 (tức 28/10 năm Bính Ngọ), tại tư gia nhà gái — Xóm 2, thôn Thượng, xã Phật Tích, tỉnh Bắc Ninh.

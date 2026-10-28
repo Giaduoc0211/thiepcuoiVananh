@@ -28,6 +28,7 @@
   <link rel="preload" href="assets/fonts/viaodalibre-400-normal-viet.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="assets/fonts/fonts.css">
   <link rel="stylesheet" href="assets/css/style.css">
+  <script src="assets/js/config.js" defer></script>
   <script src="assets/js/photos.js" defer></script>
   <script src="assets/js/main.js" defer></script>
 
@@ -343,7 +344,7 @@
         </div>
 
         <div class="wishes" id="wishes" aria-live="polite"></div>
-        <p class="guestbook__note">Lời chúc được lưu trên thiết bị của bạn.</p>
+        <p class="guestbook__note" id="wishNote">Lời chúc được lưu trên thiết bị của bạn.</p>
       </section>
 
       <section class="gift" id="gift" aria-labelledby="t-gift" hidden>
@@ -392,7 +393,7 @@
 
         <button class="modal__submit" type="submit">Gửi xác nhận</button>
       </form>
-      <p class="modal__note">Thông tin được lưu trên thiết bị của bạn.</p>
+      <p class="modal__note" id="rsvpNote">Thông tin được lưu trên thiết bị của bạn.</p>
     </div>
   </div>
 

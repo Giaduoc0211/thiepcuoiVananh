@@ -25,8 +25,9 @@
     accountName: "",
     bankName: ""
   };
-  var GUESTBOOK_ENDPOINT = "";
-  var RSVP_ENDPOINT = "";
+  var ENDPOINTS = window.WEDDING_ENDPOINTS || {};
+  var GUESTBOOK_ENDPOINT = ENDPOINTS.guestbook || "";
+  var RSVP_ENDPOINT = ENDPOINTS.rsvp || "";
 
   var WISH_KEY = "va-kien-wishes-v1";
   var RSVP_KEY = "va-kien-rsvp-v1";
@@ -104,6 +105,44 @@
       body: JSON.stringify(payload)
     });
   }
+
+  function postForm(url, payload) {
+    if (!url) {
+      return Promise.resolve();
+    }
+
+    var body = new URLSearchParams();
+    Object.keys(payload).forEach(function (key) {
+      if (payload[key] !== undefined && payload[key] !== null) {
+        body.append(key, payload[key]);
+      }
+    });
+
+    return fetch(url, {
+      method: "POST",
+      mode: "no-cors",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: body.toString()
+    });
+  }
+
+  function updateEndpointNotes() {
+    var rsvpNote = document.getElementById("rsvpNote");
+    var wishNote = document.getElementById("wishNote");
+
+    if (rsvpNote) {
+      rsvpNote.textContent = RSVP_ENDPOINT
+        ? "Thông tin sẽ được gửi đến cô dâu."
+        : "Thông tin được lưu trên thiết bị của bạn.";
+    }
+    if (wishNote) {
+      wishNote.textContent = GUESTBOOK_ENDPOINT
+        ? "Lời chúc sẽ được gửi đến cô dâu."
+        : "Lời chúc được lưu trên thiết bị của bạn.";
+    }
+  }
+
+  updateEndpointNotes();
 
   /* ----------------------------------------------------------------------
      Cover
@@ -873,9 +912,11 @@
       }
 
       var entry = {
+        action: "rsvp",
         name: name,
         attend: attend,
         count: count,
+        guest: guestName,
         sentAt: Date.now()
       };
 
@@ -886,11 +927,15 @@
       stored.unshift(entry);
       writeStore(RSVP_KEY, stored.slice(0, 100));
 
-      postJson(RSVP_ENDPOINT, entry).catch(function () {});
+      postForm(RSVP_ENDPOINT, entry).catch(function () {});
 
       rsvpForm.reset();
       closeModal(rsvpModal);
-      showToast("Đã gửi xác nhận. Cảm ơn bạn!");
+      showToast(
+        RSVP_ENDPOINT
+          ? "Đã gửi xác nhận. Cảm ơn bạn!"
+          : "Đã lưu xác nhận trên thiết bị này."
+      );
     });
   }
 
@@ -1092,8 +1137,10 @@
       }
 
       var entry = {
+        action: "wish",
         name: name,
         wish: text,
+        guest: guestName,
         time: Date.now()
       };
 
@@ -1102,11 +1149,15 @@
       wishesCache = list.slice(0, 50);
       writeStore(WISH_KEY, wishesCache);
 
-      postJson(GUESTBOOK_ENDPOINT, entry).catch(function () {});
+      postForm(GUESTBOOK_ENDPOINT, entry).catch(function () {});
 
       wishForm.reset();
       renderWishes(wishesCache);
-      showToast("Đã gửi lời chúc. Cảm ơn bạn!");
+      showToast(
+        GUESTBOOK_ENDPOINT
+          ? "Đã gửi lời chúc. Cảm ơn bạn!"
+          : "Đã lưu lời chúc trên thiết bị này."
+      );
     });
   }
 
